@@ -1,0 +1,31 @@
+{
+  "author": "",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "fortify-schema": "^2.2.0",
+    "nquickdev": "^1.0.3",
+    "strulink": "^1.1.0",
+    "xynginc": "^1.0.6",
+    "xypriss": "^4.3.6",
+    "xypriss-security": "^1.1.10"
+  },
+  "description": "This project is created to test the xynginc plugin in a real environment. It demonstrates the XYNGINC plugin in a realistic production-like environment, ideal for testing its features on a live VPS setup.",
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "xynginc-demo",
+  "scripts": {
+    "build": "tsc && tsc-alias",
+    "dev": "quickdev --script ./src/server.ts",
+    "start": "node ./dist/server.js"
+  },
+  "type": "module",
+  "version": "1.0.1",
+  "devDependencies": {
+    "@types/node": "^25.0.2",
+    "bun": "^1.3.4",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.16",
+    "tsconfig-paths": "^4.2.0"
+  }
+}
