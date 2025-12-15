@@ -21,6 +21,8 @@
 import { ServerOptions } from "xypriss";
 import { _sys } from "../_sys/index.js";
 import { serv_host } from "./host.conf.js";
+import XNCP from "xynginc";
+import { domains } from "./xyncp.config.js";
 
 /**
  * Main server configuration object
@@ -59,219 +61,45 @@ export const serverConfig: ServerOptions = {
     /** Service identification for optimization system */
     serviceName: _sys.__name,
     version: _sys.__version,
-
-    /** Auto port switching for development */
-    autoPortSwitch: {
-      enabled: true,
-      maxAttempts: 10,
-      strategy: "increment",
-    },
   },
 
-  /**
-   * Security configuration
-   * Comprehensive security middleware and protection features
-   */
-  security: {
-    /** Enable security middleware */
-    enabled: true,
-
-    /** Enable Helmet security headers */
-    helmet: true,
-  },
-
-  /**
-   * Performance optimization configuration
-   * Advanced caching and optimization features
-   */
-  performance: {
-    /** Enable performance optimizations */
-    optimizationEnabled: true,
-
-    /** Enable response compression */
-    compression: true,
-  },
-
-  /**
-   * Monitoring and logging
-   * Application monitoring and observability
-   */
-  monitoring: {
-    /** Enable monitoring system */
-    enabled: true,
-
-    /** Health check configuration */
-    healthChecks: true,
-
-    /** Metrics collection */
-    metrics: true,
-
-    /** Alert thresholds */
-    alertThresholds: {
-      memoryUsage: 80, // 80% memory usage
-      errorRate: 5, // 5% error rate
-      latency: 1000, // 1 second average latency
-    },
-  },
-
-  /**
-   * Cache configuration
-   * Optimized caching settings for web applications
-   */
-  cache: {
-    /** Enable caching for better performance */
-    enabled: true,
-
-    /** Use memory cache for development */
-    strategy: "memory",
-
-    /** Default TTL - 1 hour for web content */
-    ttl: 3600,
-
-    /** Maximum cache size */
-    maxSize: 100 * 1024 * 1024, // 100MB
-  },
-
-  /**
-   * Clustering configuration
-   * Multi-process clustering for production scaling
-   */
-  cluster: {
-    /** Enable clustering in production */
-    enabled: _sys.__env === "production",
-
-    /** Cluster configuration */
-    config: {
-      /** Number of worker processes */
-      workers: 4,
-
-      /** Cluster security settings */
-      security: {
-        /** Encrypt inter-process communication */
-        encryptIPC: true,
-
-        /** Isolate worker processes */
-        isolateWorkers: true,
-      },
-    },
-  },
-
-  /**
-   * Plugin system configuration
-   * Extensible plugin architecture
-   */
   plugins: {
-    /** Route optimization plugin */
-    routeOptimization: {
-      enabled: true,
-    },
+    register: [
+      /**
+       * These domains are test domains provided by nehonix team
+       * You would need to replace it with your own domain
+       */
+      XNCP({
+        domains: [
+          {
+            domain: domains.d1, // Replace with your domain
+            port: 9837,
+            ssl: false, // for this first server, we won't use SSL
+            email: "no-exist@nehonix.xyz", // Replace with your email
+          },
+          // {
+          //   domain: domains.d2, // Replace with your domain
+          //   port: 7365,
+          //   ssl: true, // for this second server, we will use SSL
+          //   email: "no-exist@nehonix.xyz", // Replace with your email
+          // },
+        ],
+      }),
+    ],
   },
 
-  /**
-   * Request management configuration
-   * Advanced request handling and network quality monitoring
-   */
-  requestManagement: {
-    /** Network quality monitoring */
-    networkQuality: {
-      enabled: true,
-    },
-
-    /** Request timeout configuration */
-    timeout: {
-      enabled: true,
-      defaultTimeout: 30000, // 30 seconds
-    },
-  },
-
-  /**
-   * File upload configuration
-   * Note: This feature is available in XyPriss but configured separately
-   * See fileUpload property in security configuration above
-   */
-  fileUpload: {
-    /** Enable file uploads */
-    enabled: true,
-
-    /** Maximum file size */
-    maxFileSize: 5 * 1024 * 1024, // 5MB
-
-    /** Maximum files per request */
-    maxFiles: 10,
-
-    /** Storage type */
-    storage: "memory",
-  },
-
-  /**
-   * Multi-server configuration for running multiple server instances
-   *
-   * Allows you to run multiple server instances with different configurations,
-   * ports, and route scopes from a single configuration. Useful for microservices,
-   * API versioning, or separating concerns (e.g., API server vs admin server).
-   *
-   * @example
-   * ```typescript
-   * multiServer: {
-   *   enabled: true,
-   *   servers: [
-   *     {
-   *       id: "api-server",
-   *       port: 3001,
-   *       routePrefix: "/api/v1",
-   *       allowedRoutes: ["/api/v1/*"],
-   *       server: {
-   *         host: "localhost",
-   *         jsonLimit: "20mb"
-   *       },
-   *       performance: {
-   *         compression: true,
-   *         optimizationEnabled: true
-   *       }
-   *     },
-   *     {
-   *       id: "admin-server",
-   *       port: 3002,
-   *       routePrefix: "/admin",
-   *       allowedRoutes: ["/admin/*"],
-   *       security: {
-   *         enabled: true,
-   *         level: "maximum"
-   *       },
-   *       cache: {
-   *         enabled: false // Disable caching for admin panel
-   *       }
-   *     },
-   *     {
-   *       id: "static-server",
-   *       port: 3003,
-   *       routePrefix: "/static",
-   *       allowedRoutes: ["/static/*"],
-   *       performance: {
-   *         compression: true,
-   *         staticRouteOptimization: true
-   *       },
-   *       fileUpload: {
-   *         enabled: true,
-   *         maxFileSize: 50 * 1024 * 1024, // 50MB for static assets
-   *         storage: "disk",
-   *         destination: "./public/uploads"
-   *       }
-   *     }
-   *   ]
-   * }
-   * ```
-   */
   multiServer: {
     /** Enable multi-server mode */
-    enabled: false, // "enabled = true" will activate the multi server mode
+    enabled: true, // "enabled = true" will activate the multi server mode
 
     /** Array of server configurations */
     servers: [
-      // Example server configurations (uncomment and modify as needed)
       {
-        id: "api-server",
-        port: 3001,
+        // I've added a domain as "ID" for better identification (to help you understand)
+        // But you can changed to anything else than a domain if needed. This won't affect
+        // the functionality of the server.
+        id: domains.d1,
+        port: 9837,
         routePrefix: "/api/v1",
         allowedRoutes: ["/api/v1/*"],
         server: {
@@ -280,8 +108,8 @@ export const serverConfig: ServerOptions = {
         },
       },
       {
-        id: "admin-server",
-        port: 3002,
+        id: domains.d2,
+        port: 7365,
         routePrefix: "/admin",
         allowedRoutes: ["/admin/*"],
       },

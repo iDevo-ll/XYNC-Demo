@@ -205,6 +205,44 @@ Edit `src/configs/xypriss.config.ts` to customize:
 - Caching configuration
 - **XyNginC domain settings** for production deployment
 
+### 🌐 Domain Configuration
+
+**Important**: This demo uses test domains provided by the Nehonix team. You **must** replace these with your own domains for production deployment:
+
+```typescript
+/**
+ * These domains are test domains provided by nehonix team
+ * You would need to replace it with your own domain
+ */
+{
+  id: "server.nehonix.xyz",      // ← Replace with your domain
+  port: 9283,
+  routePrefix: "/api/v1",
+  allowedRoutes: ["/api/v1/*"],
+  server: {
+    host: "localhost",
+    jsonLimit: "20mb",
+  },
+},
+{
+  id: "admin.nehonix.xyz",       // ← Replace with your domain
+  port: 9383,
+  routePrefix: "/admin",
+  allowedRoutes: ["/admin/*"],
+},
+```
+
+**Replace**:
+
+- `server.nehonix.xyz` → `api.yourdomain.com` or your preferred API subdomain
+- `admin.nehonix.xyz` → `admin.yourdomain.com` or your admin subdomain
+
+**Important Notes**:
+
+- These .xyz domains are for **testing purposes only**
+- Set up DNS A records pointing to your VPS IP address
+- Ensure your domains are properly configured before running the XyNginC plugin
+
 ## 🧪 Development
 
 ### Adding Routes
@@ -352,7 +390,7 @@ This project is licensed under the MIT License.
 ## 🆘 Support
 
 - [XyPriss Documentation](https://github.com/Nehonix-Team/XyPriss)
-- [XyNginC Plugin Documentation](https://github.com/iDevo-ll/XYNC-Demo)
+- [XyNginC Plugin Documentation](https://github.com/Nehonix-Team/xynginc.git)
 - [TypeScript Documentation](https://www.typescriptlang.org/)
 - [GitHub Issues](https://github.com/iDevo-ll/XYNC-Demo/issues)
 
