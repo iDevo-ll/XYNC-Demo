@@ -21,6 +21,7 @@
 import { ServerOptions } from "xypriss";
 import { _sys } from "../_sys/index.js";
 import { serv_host } from "./host.conf.js";
+// import XNCP from "../../../src";
 import XNCP from "xynginc";
 import { domains } from "./xyncp.config.js";
 
@@ -86,7 +87,7 @@ export const serverConfig: ServerOptions = {
           //   email: "no-exist@nehonix.xyz", // Replace with your email
           // },
         ],
-      }),
+      }) as any,
     ],
   },
 
