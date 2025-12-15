@@ -70,6 +70,8 @@ export const serverConfig: ServerOptions = {
        * You would need to replace it with your own domain
        */
       XNCP({
+        autoDownload: true,
+        installRequirements: true,
         domains: [
           {
             domain: domains.d1, // Replace with your domain
