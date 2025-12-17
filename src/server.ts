@@ -1,22 +1,12 @@
 /**
- * XyPriss Application Server Entry Point
+ * =================================== DEMO PROJECT FOR XNCPlugin ============================
+ * This project demonstrates the XYNGINC plugin in a realistic production-like environment,
+ * ideal for testing its features on a live VPS setup.
  *
- * This is the main entry point for your XyPriss application.
- * The server is configured with security, performance optimizations.
+ * IMPORTANT: After cloning this repo, update to the latest versions of "xynginc" and "xypriss"
+ * packages to ensure you have the most recent features and security updates.
  *
- * @fileoverview Main server configuration and startup
- * @version 1.0.0
- * @author XyPriss Team
- * @since 2025-01-01
- *
- * @example
- * ```bash
- * # Development mode
- * npm run dev
- *
- * # Production build
- * npm run build && npm start
- * ```
+ * *******************************************************************************************
  */
 
 import { createServer } from "xypriss";
@@ -44,8 +34,8 @@ const app = createServer(serverConfig);
  * Setup API routes
  * Define your application routes and handlers
  */
+
 app.use("/api", router);
-app.use("/", router);
 
 app.start(undefined, () => {
   console.log(`📊 Health check: http://localhost:${_sys.__port}/health`);

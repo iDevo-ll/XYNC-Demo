@@ -104,7 +104,7 @@ npm start
 - **🌐 Nginx Integration**: Automatic reverse proxy configuration via XyNginC plugin
 - **🔒 SSL/HTTPS**: Automatic SSL certificate management with Let's Encrypt
 
-## 🔧 XyNginC Integration
+## > XyNginC Integration
 
 This demo project showcases the XyNginC plugin in action. The server configuration includes:
 
@@ -181,7 +181,7 @@ sudo npm install -g pm2
 
 - `POST /api/validate` - Validate input data
 
-## 🔧 Configuration
+## > Configuration
 
 ### Environment Variables
 

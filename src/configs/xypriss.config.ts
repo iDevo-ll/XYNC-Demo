@@ -21,7 +21,7 @@
 import { ServerOptions } from "xypriss";
 import { _sys } from "../_sys/index.js";
 import { serv_host } from "./host.conf.js";
-// import XNCP from "../../../src";
+// import XNCP from "../../../src"; // uncomment if you've XNCP on your local
 import XNCP from "xynginc";
 import { domains } from "./xyncp.config.js";
 
@@ -72,20 +72,21 @@ export const serverConfig: ServerOptions = {
        */
       XNCP({
         autoDownload: true,
-        installRequirements: true,
+        installRequirements: true, // Allways true for better experience
+        // binaryPath: "/path/to/xynginc", // Use this option if you encounter issues with the default binary detection
         domains: [
           {
             domain: domains.d1, // Replace with your domain
             port: 9837,
             ssl: false, // for this first server, we won't use SSL
+            email: "no-exist@nehonix.xyz", // Replace with your email (these mails doesn't exists so don't mail on it)
+          },
+          {
+            domain: domains.d2, // Replace with your domain
+            port: 7365,
+            ssl: true, // for this second server, we will use SSL
             email: "no-exist@nehonix.xyz", // Replace with your email
           },
-          // {
-          //   domain: domains.d2, // Replace with your domain
-          //   port: 7365,
-          //   ssl: true, // for this second server, we will use SSL
-          //   email: "no-exist@nehonix.xyz", // Replace with your email
-          // },
         ],
       }) as any,
     ],
@@ -103,7 +104,7 @@ export const serverConfig: ServerOptions = {
         // the functionality of the server.
         id: domains.d1,
         port: 9837,
-        routePrefix: "/api/v1",
+        routePrefix: "/api/v1", // All non-matching routes under this prefix should return 404. Ensure your router has routes that match these patterns.
         allowedRoutes: ["/api/v1/*"],
         server: {
           host: "localhost",
@@ -113,8 +114,8 @@ export const serverConfig: ServerOptions = {
       {
         id: domains.d2,
         port: 7365,
-        routePrefix: "/admin",
-        allowedRoutes: ["/admin/*"],
+        routePrefix: "/v2",
+        allowedRoutes: ["/v2/*"],
       },
     ],
   },
