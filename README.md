@@ -91,7 +91,7 @@ xfpm start
 - **High Performance** - Built on XyPriss framework with optimized performance
 - **Hot Reload** - Development server with automatic reloading and TypeScript compilation
 - **Security** - Built-in security middleware and protections
-- **Validation** - Request validation with Fortify Schema and TypeScript types
+- **Validation** - Request validation with Reliant Typeand TypeScript types
 - **Caching** - Memory-based caching for improved performance
 - **Nginx Integration** - Automatic reverse proxy configuration via XyNginC plugin
 - **SSL/HTTPS** - Automatic SSL certificate management with Let's Encrypt
@@ -247,7 +247,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 ### Validation
 
-Use Fortify Schema for request validation:
+Use Reliant Typefor request validation:
 
 ```typescript
 import { Interface } from "reliant-type";
@@ -287,7 +287,7 @@ The XyNginC plugin automatically handles reverse proxy setup, SSL certificate in
 - `xypriss-security` - Security utilities
 - `reliant-type` - Validation library
 - `strulink` - URI processing
-- `nquickdev` - Development server
+- `FileOnix` - Development server
 - `xynginc` - Nginx and SSL management plugin
 
 ### Development
