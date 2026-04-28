@@ -9,7 +9,7 @@ This demonstration project showcases the XyNginC plugin in a realistic productio
 [![Deploy to VPS](https://img.shields.io/badge/Deploy-VPS-blue?style=for-the-badge)](https://github.com/iDevo-ll/XYNC-Demo.git)
 [![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=for-the-badge)](https://github.com/iDevo-ll/XYNC-Demo.git)
 
-## 🎯 Purpose
+## Purpose
 
 This test project demonstrates:
 
@@ -18,7 +18,7 @@ This test project demonstrates:
 - **XyNginC Integration**: Full integration with the XyNginC plugin for automated reverse proxy setup
 - **SSL Management**: Automatic Let's Encrypt certificate generation and renewal
 
-## 🚀 Quick Start
+## Quick Start
 
 ### For VPS Deployment
 
@@ -32,7 +32,7 @@ This test project demonstrates:
 2. **Install dependencies**:
 
    ```bash
-   npm install
+   xfpm install
    ```
 
 3. **Configure your domain**:
@@ -41,25 +41,21 @@ This test project demonstrates:
    - Set up DNS A record pointing to your VPS IP address
 
 4. **Start with XyNginC**:
+
    ```bash
-   sudo npm start
+   sudo xfpm start
    ```
 
-The XyNginC plugin will automatically:
-
-- Configure Nginx reverse proxy
-- Set up SSL certificates via Let's Encrypt
-- Enable automatic HTTPS
-- Manage domain routing
+The XyNginC plugin will automatically configure Nginx reverse proxy, set up SSL certificates via Let's Encrypt, and manage domain routing.
 
 ### For Development
 
 ```bash
 # Install dependencies
-npm install
+xfpm install
 
 # Start development server with hot reload
-npm run dev
+xfpm run dev
 ```
 
 The server will start on `http://localhost:9837` with hot reload and TypeScript compilation enabled.
@@ -67,14 +63,11 @@ The server will start on `http://localhost:9837` with hot reload and TypeScript 
 ### Production Build
 
 ```bash
-# Build for production
-npm run build
-
-# Start production server
-npm start
+xfpm run build
+xfpm start
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── src/
@@ -90,23 +83,22 @@ npm start
 └── tsconfig.json          # TypeScript configuration
 ```
 
-## 🛠️ Features
+## Features
 
-- 🔐 **Authentication** - JWT-based authentication
-- 📁 **File Upload** - Support for file uploads
-- **Type Safety**: Full TypeScript support with strict type checking
-- **High Performance**: Built on XyPriss framework with optimized performance
-- **Hot Reload**: Development server with automatic reloading and TypeScript compilation
-- **Security**: Built-in security middleware and protections
-- **Validation**: Request validation with Fortify Schema and TypeScript types
-- **File Upload**: Support for multipart file uploads with type safety
-- **Caching**: Memory-based caching for improved performance
-- **🌐 Nginx Integration**: Automatic reverse proxy configuration via XyNginC plugin
-- **🔒 SSL/HTTPS**: Automatic SSL certificate management with Let's Encrypt
+- **Authentication** - JWT-based authentication
+- **File Upload** - Support for multipart file uploads with type safety
+- **Type Safety** - Full TypeScript support with strict type checking
+- **High Performance** - Built on XyPriss framework with optimized performance
+- **Hot Reload** - Development server with automatic reloading and TypeScript compilation
+- **Security** - Built-in security middleware and protections
+- **Validation** - Request validation with Fortify Schema and TypeScript types
+- **Caching** - Memory-based caching for improved performance
+- **Nginx Integration** - Automatic reverse proxy configuration via XyNginC plugin
+- **SSL/HTTPS** - Automatic SSL certificate management with Let's Encrypt
 
-## > XyNginC Integration
+## XyNginC Integration
 
-This demo project showcases the XyNginC plugin in action. The server configuration includes:
+The server configuration includes:
 
 ```typescript
 import { createServer } from "xypriss";
@@ -132,16 +124,12 @@ const app = createServer({
 
 ### VPS Requirements
 
-To run this demo on a VPS, ensure you have:
-
 - **Linux VPS** (Ubuntu/Debian recommended)
 - **Root access** or sudo privileges
 - **Domain name** with DNS pointing to your VPS IP
 - **Ports 80 and 443** open for HTTP/HTTPS traffic
 
 ### Prerequisites Installation
-
-On your VPS, install the required software:
 
 ```bash
 # Update system
@@ -151,6 +139,9 @@ sudo apt update && sudo apt upgrade -y
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
+# Install XFPM
+curl -sL https://xypriss.nehonix.com/install.js | node
+
 # Install Nginx
 sudo apt install nginx -y
 
@@ -158,10 +149,10 @@ sudo apt install nginx -y
 sudo apt install certbot python3-certbot-nginx -y
 
 # Install PM2 for process management
-sudo npm install -g pm2
+sudo xfpm install -g pm2
 ```
 
-## 📚 API Endpoints
+## API Endpoints
 
 ### Health Check
 
@@ -181,7 +172,7 @@ sudo npm install -g pm2
 
 - `POST /api/validate` - Validate input data
 
-## > Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -196,18 +187,12 @@ SSL_EMAIL=admin@your-domain.com
 
 ### Server Configuration
 
-Edit `src/configs/xypriss.config.ts` to customize:
+Edit `src/configs/xypriss.config.ts` to customize server port, security settings, performance options, file upload limits, and XyNginC domain settings.
 
-- Server port and host
-- Security settings
-- Performance options
-- File upload limits
-- Caching configuration
-- **XyNginC domain settings** for production deployment
+### Domain Configuration
 
-### 🌐 Domain Configuration
-
-**Important**: This demo uses test domains provided by the Nehonix team. You **must** replace these with your own domains for production deployment:
+> [!IMPORTANT]
+> This demo uses test domains provided by the Nehonix team. You **must** replace these with your own domains before deploying to production.
 
 ```typescript
 /**
@@ -215,7 +200,7 @@ Edit `src/configs/xypriss.config.ts` to customize:
  * You would need to replace it with your own domain
  */
 {
-  id: "server.nehonix.xyz",      // ← Replace with your domain
+  id: "server.nehonix.xyz",      // <- Replace with your domain
   port: 9283,
   routePrefix: "/api/v1",
   allowedRoutes: ["/api/v1/*"],
@@ -225,32 +210,25 @@ Edit `src/configs/xypriss.config.ts` to customize:
   },
 },
 {
-  id: "admin.nehonix.xyz",       // ← Replace with your domain
+  id: "admin.nehonix.xyz",       // <- Replace with your domain
   port: 9383,
   routePrefix: "/admin",
   allowedRoutes: ["/admin/*"],
 },
 ```
 
-**Replace**:
+Replace `server.nehonix.xyz` with your API subdomain and `admin.nehonix.xyz` with your admin subdomain.
 
-- `server.nehonix.xyz` → `api.yourdomain.com` or your preferred API subdomain
-- `admin.nehonix.xyz` → `admin.yourdomain.com` or your admin subdomain
+> [!NOTE]
+> These `.xyz` domains are for testing purposes only. Make sure your DNS A records point to your VPS IP before running the XyNginC plugin.
 
-**Important Notes**:
-
-- These .xyz domains are for **testing purposes only**
-- Set up DNS A records pointing to your VPS IP address
-- Ensure your domains are properly configured before running the XyNginC plugin
-
-## 🧪 Development
+## Development
 
 ### Adding Routes
 
 Edit `src/routes/index.ts`:
 
 ```typescript
-// Add new routes with type safety
 router.get("/api/new-endpoint", (req: Request, res: Response) => {
   res.json({ message: "New endpoint" });
 });
@@ -261,7 +239,6 @@ router.get("/api/new-endpoint", (req: Request, res: Response) => {
 Edit `src/middleware/index.ts`:
 
 ```typescript
-// Add custom middleware with proper typing
 app.use((req: Request, res: Response, next: NextFunction) => {
   console.log(`${req.method} ${req.path}`);
   next();
@@ -270,10 +247,10 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 ### Validation
 
-Use Fortify Schema for request validation with TypeScript:
+Use Fortify Schema for request validation:
 
 ```typescript
-import { Interface } from "fortify-schema";
+import { Interface } from "reliant-type";
 
 const userSchema = Interface({
   username: "username",
@@ -281,87 +258,57 @@ const userSchema = Interface({
   password: "password",
 });
 
-// Use in routes with type safety
-router.post(
-  "/api/users",
-  validateBody(userSchema),
-  (req: Request, res: Response) => {
-    // Request is validated and typed
-    const userData = req.body; // Fully typed
-    res.json({ success: true, user: userData });
-  }
-);
+router.post("/api/users", validateBody(userSchema), (req: Request, res: Response) => {
+  const userData = req.body;
+  res.json({ success: true, user: userData });
+});
 ```
 
-## 🚀 Production Deployment
+## Production Deployment
 
-### Docker Deployment
-
-```dockerfile
-FROM node:18-alpine
-
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-
-COPY . .
-RUN npm run build
-EXPOSE 9837
-
-CMD ["npm", "start"]
-```
-
-### PM2 Deployment
+### PM2
 
 ```bash
-npm install -g pm2
-pm2 start dist/server.js --name "xynginc-demo" --watch
+xfpm install -g pm2
+pm2 start dist/server.js --name "xynginc-demo"
 pm2 startup
 pm2 save
 ```
 
 ### Nginx Configuration
 
-The XyNginC plugin automatically generates optimal Nginx configuration:
+The XyNginC plugin automatically handles reverse proxy setup, SSL certificate integration, security headers, gzip compression, and rate limiting.
 
-- Reverse proxy setup
-- SSL certificate integration
-- Security headers
-- Gzip compression
-- Rate limiting
+## Dependencies
 
-## 📦 Dependencies
-
-### Runtime Dependencies
+### Runtime
 
 - `xypriss` - Main framework
 - `xypriss-security` - Security utilities
-- `fortify-schema` - Validation library
-- `nehonix-uri-processor` - URI processing
+- `reliant-type` - Validation library
+- `strulink` - URI processing
 - `nquickdev` - Development server
 - `xynginc` - Nginx and SSL management plugin
 
-### Development Dependencies
+### Development
 
 - `typescript` - TypeScript compiler
 - `@types/node` - Node.js type definitions
 - `bun` - Fast JavaScript runtime
 - `prisma` - Database toolkit
 
-## 🛡️ Security Features
+## Security Features
 
-- **HTTPS Redirect**: Automatic redirect from HTTP to HTTPS
-- **Security Headers**: Comprehensive security headers (HSTS, CSP, etc.)
-- **Rate Limiting**: Built-in request rate limiting
-- **Input Validation**: Schema-based request validation
-- **JWT Authentication**: Secure token-based authentication
-- **File Upload Security**: Secure file upload handling
+- **HTTPS Redirect** - Automatic redirect from HTTP to HTTPS
+- **Security Headers** - HSTS, CSP, and other standard headers
+- **Rate Limiting** - Built-in request rate limiting
+- **Input Validation** - Schema-based request validation
+- **JWT Authentication** - Secure token-based authentication
+- **File Upload Security** - Secure file upload handling
 
-## 🔍 Monitoring
+## Monitoring
 
 ### Health Checks
-
-The application provides comprehensive health monitoring:
 
 - `GET /health` - Basic health status
 - `GET /api/status` - Detailed application status
@@ -369,37 +316,24 @@ The application provides comprehensive health monitoring:
 
 ### Logs
 
-Application logs are available through:
-
 - PM2 logs: `pm2 logs xynginc-demo`
 - Nginx logs: `/var/log/nginx/`
 - System logs: `journalctl -u nginx`
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes with proper TypeScript types
-4. Test thoroughly on a VPS environment
+4. Test on a VPS environment
 5. Submit a pull request
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License.
+MIT
 
-## 🆘 Support
+## Support
 
 - [XyPriss Documentation](https://github.com/Nehonix-Team/XyPriss)
 - [XyNginC Plugin Documentation](https://github.com/Nehonix-Team/xynginc.git)
-- [TypeScript Documentation](https://www.typescriptlang.org/)
 - [GitHub Issues](https://github.com/iDevo-ll/XYNC-Demo/issues)
-
-## 🎉 Acknowledgments
-
-- Built with ❤️ using [XyPriss Framework](https://github.com/Nehonix-Team/XyPriss)
-- Powered by [XyNginC Plugin](https://github.com/iDevo-ll/XYNC-Demo) for seamless Nginx integration
-- SSL certificates provided by [Let's Encrypt](https://letsencrypt.org/)
-
----
-
-**Ready to test XyNginC in production? Clone and deploy this demo on your VPS today!**
