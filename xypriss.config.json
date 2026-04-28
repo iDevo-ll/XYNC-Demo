@@ -1,1 +1,17 @@
-{}
+{
+    "$internal": {
+        "xynginc": {
+            "permissions": {
+                "allowedHooks": [
+                    "XHS.HOOK.LIFECYCLE.REGISTER",
+                    "XHS.HOOK.LIFECYCLE.SERVER_START",
+                    "XHS.HOOK.LIFECYCLE.SERVER_STOP",
+                    "XHS.HOOK.LIFECYCLE.SERVER_READY"
+                ]
+            },
+            "signature": {
+                "author_key": "ed25519:a58b17a3e46302dd3ae5538bc9b8b991c57f4c5fe2e7d8ac41803de818d947f4"
+            }
+        }
+    }
+}

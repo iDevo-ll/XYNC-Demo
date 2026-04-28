@@ -7,8 +7,8 @@
  * You can also load this configuration from "xypriss.config.json" if you prefer to use JSON.
  *
  * @fileoverview Server configuration with comprehensive feature support
- * @version 1.1.2
- * @author XyPriss Team
+ * @version 1.1.3
+ * @author iDevo
  * @since 2025-01-01
  *
  * @example
@@ -19,7 +19,6 @@
  */
 
 import { ServerOptions } from "xypriss";
-import { _sys } from "../_sys/index.js";
 import { serv_host } from "./host.conf.js";
 // import XNCP from "../../../src"; // uncomment if you've XNCP on your local
 import XNCP from "xynginc";
@@ -34,7 +33,7 @@ export const serverConfig: ServerOptions = {
    * Environment configuration
    * Controls application behavior based on deployment environment
    */
-  env: _sys.__env,
+  env: __sys__.__env__.mode as any,
 
   /**
    * Server-specific settings
@@ -42,13 +41,10 @@ export const serverConfig: ServerOptions = {
    */
   server: {
     /** Server port - defaults to environment PORT or system default */
-    port: _sys.__port,
+    port: __sys__.vars.__port__,
 
     /** Server host - defaults to localhost for development */
     host: serv_host,
-
-    /** Trust proxy settings for reverse proxy deployments */
-    trustProxy: process.env.TRUST_PROXY === "true",
 
     /** Enable automatic JSON body parsing */
     autoParseJson: true,
@@ -60,13 +56,12 @@ export const serverConfig: ServerOptions = {
     urlEncodedLimit: "10mb",
 
     /** Service identification for optimization system */
-    serviceName: _sys.__name,
-    version: _sys.__version,
+    serviceName: __sys__.vars.__name__,
+    version: __sys__.vars.__version__,
   },
 
   plugins: {
     register: [
- 
       /**
        * These domains are test domains provided by nehonix team
        * You would need to replace it with your own domain
@@ -89,7 +84,7 @@ export const serverConfig: ServerOptions = {
             email: "no-exist@nehonix.xyz", // Replace with your email
           },
         ],
-      }) as any,
+      }),
     ],
   },
 
@@ -108,7 +103,6 @@ export const serverConfig: ServerOptions = {
         routePrefix: "/api/v1", // All non-matching routes under this prefix should return 404. Ensure your router has routes that match these patterns.
         allowedRoutes: ["/api/v1/*"],
         server: {
-          host: "localhost",
           jsonLimit: "20mb",
         },
       },

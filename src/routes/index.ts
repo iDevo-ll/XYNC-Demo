@@ -10,9 +10,6 @@
  * @since 2025-01-01
  */
 
-import { _sys } from "@/_sys";
-import { validateBody } from "@/middleware/validation.middleware";
-import { userSchema } from "@/schema/user.schema";
 import { Router, type Request, type Response } from "xypriss";
 
 const router = Router();
@@ -22,8 +19,8 @@ router.get("/health", (reqw: Request, res: Response) => {
   res.json({
     status: "healthy",
     timestamp: new Date().toISOString(),
-    version: _sys.__version,
-    environment: _sys.__env,
+    version: __sys__.vars.__version__,
+    environment: __sys__.__env__.mode,
   });
 });
 
@@ -31,9 +28,9 @@ router.get("/health", (reqw: Request, res: Response) => {
 router.get("/status", (reqw: Request, res: Response) => {
   res.json({
     name: "XyPriss Application",
-    version: _sys.__version,
+    version: __sys__.vars.__version__,
+    environment: __sys__.__env__.mode,
     author: "XyPriss Team",
-    environment: _sys.__env,
     features: {
       fileUpload: true,
       caching: true,
@@ -78,21 +75,5 @@ router.post("/upload", (reqw: Request, res: Response) => {
     note: "Implement multer middleware and file processing",
   });
 });
-
-// Validation routes (example implementation)
-router.post(
-  "/validate",
-  validateBody(userSchema),
-  (reqw: Request, res: Response) => {
-    const validatedData = reqw.body;
-    console.log("validatedData", validatedData);
-    // TODO: Implement input validation with validation middleware
-    res.json({
-      message: "Input validation endpoint",
-      note: "Implement validation middleware and schema validation",
-      validatedData,
-    });
-  }
-);
 
 export default router;

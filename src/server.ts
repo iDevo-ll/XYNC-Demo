@@ -10,13 +10,6 @@
  */
 
 import { createServer } from "xypriss";
-import dotenv from "dotenv";
-
-// Load environment variables
-dotenv.config();
-
-// Import system configuration
-import { _sys } from "./_sys/index";
 
 // Import server configuration
 import { serverConfig } from "./configs/xypriss.config";
@@ -33,16 +26,17 @@ const app = createServer(serverConfig);
 /**
  * Setup API routes
  * Define your application routes and handlers
- */ 
+ */
 
 app.use("/api", router);
 
-app.start(undefined, () => {
-  console.log(`📊 Health check: http://localhost:${_sys.__port}/health`);
-  console.log(`📋 API status: http://localhost:${_sys.__port}/api/status`);
-  console.log(`👥 Users API: http://localhost:${_sys.__port}/api/users`);
-  console.log(`📤 File upload: http://localhost:${_sys.__port}/api/upload`);
-  console.log(`✅ Validation: http://localhost:${_sys.__port}/api/validate`);
+app.start(() => {
+  console.log(
+    `📊 Health check: http://localhost:${__sys__.vars.__PORT__}/health`,
+  );
+  console.log(
+    `📋 API status: http://localhost:${__sys__.vars.__port__}/api/status`,
+  );
   console.log(`� Press Ctrl+C to stop the server`);
 });
 
