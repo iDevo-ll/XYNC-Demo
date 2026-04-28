@@ -1,5 +1,5 @@
 {
-  "author": "",
+  "author": "Seth Eleazar",
   "dependencies": {
     "dotenv": "^17.2.3",
     "fortify-schema": "^2.2.0",

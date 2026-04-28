@@ -66,6 +66,7 @@ export const serverConfig: ServerOptions = {
 
   plugins: {
     register: [
+ 
       /**
        * These domains are test domains provided by nehonix team
        * You would need to replace it with your own domain
